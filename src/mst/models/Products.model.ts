@@ -1,4 +1,4 @@
-import { cast, getParent, getParentOfType, types } from 'mobx-state-tree'
+import { cast,  getParentOfType, types } from 'mobx-state-tree'
 
 import { RootStore } from '../stores/RootStore.store'
 
@@ -18,7 +18,7 @@ export const ProductsModel = types.model('ProductsModel', {
 
 }).actions((self) => ( {
     selectProduct() {
-        const res =  getParent(self, 2)
+        // const res =  getParent(self, 2)
         const removeProductAsRefference = getParentOfType(self, RootStore).removeProductAsRefference
         removeProductAsRefference(cast(self))
     },

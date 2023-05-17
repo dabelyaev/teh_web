@@ -1,6 +1,6 @@
 
 import { Card } from 'antd'
-import styles from './Style.module.css'
+import styles from './Style.module.scss'
 import { useHistory } from 'react-router-dom'
 import { useRootStore } from '../../mst/stores/RootStore.store'
 import { observer } from 'mobx-react'
