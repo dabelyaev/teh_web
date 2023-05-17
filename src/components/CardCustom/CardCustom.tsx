@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { useRootStore } from '../../mst/stores/RootStore.store'
 import { observer } from 'mobx-react'
 import { IProductModel } from '../../mst/interfaces'
-
+//privet
 const CardCustom = observer(({ item } : {item: IProductModel}) => {
     const { selectProductById } = useRootStore()
     let history = useHistory()
