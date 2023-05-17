@@ -1,45 +1,41 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import {  Layout } from 'antd'
 
-
-
-
-
+import CardCustom from './components/CardCustom/CardCustom'
+import { Route, Switch } from 'react-router-dom'
+import CardMore from './components/CardCustom/CardMore'
 import { observer } from 'mobx-react'
-import { useRootStore } from './mst/stores/RootStore.store'
+
 import NewMenuCustom from "./components/Layout/NewMenuCustom";
 import HeaderCustom from "./components/Layout/HeaderCustom";
-
 import ContentCustom from "./components/Layout/ContentCustom";
-
-
-import Login from "./components/CardCustom/Login";
+import LoginPage from "./components/CardCustom/Login";
+import {useRootStore} from "./mst/stores/RootStore.store";
 
 const { Footer } = Layout
 
 const App: React.FC = observer(() => {
 
-    const { fetchProducts, products, haveProducts, postsCount } = useRootStore()
+    const { fetchProducts, products, haveProducts, postsCount , selected_product} = useRootStore()
 
     useEffect(() => {
         fetchProducts()
     }, [])
 
 
-
+    console.log('>>selected_product', selected_product)
 
     return (
         <Layout style={ { minHeight: '100vh' } }>
             <NewMenuCustom/>
             <Layout className="site-layout">
                 <HeaderCustom/>
-                <ContentCustom/>
+                <ContentCustom>
 
-                   {/* <Switch>
+                    <Switch>
+                        <Route exact={ true } path={ '/login' }>
 
-                        <Route exact={ true } path={ './components/CardCustom/Login' }>
-                            <div> <Login/></div>
-
+                            <LoginPage/>
                         </Route>
                         <Route exact={ true } path={ '/' }>
                             <div
@@ -48,14 +44,13 @@ const App: React.FC = observer(() => {
                             </div>
 
                         </Route>
-                        <Route exact={ true } path={ '/conntent' }>
+                        <Route exact={ true } path={ '/content' }>
                             <div>
                                 Posts: { postsCount }
                                 { !haveProducts ? <div>No posts</div> : (
                                     products.map((post) => {
                                         return (
                                             <CardCustom item={post} />
-
                                         )
 
                                     })
@@ -66,9 +61,9 @@ const App: React.FC = observer(() => {
                         <Route path={ '/content/:id' }
                                children={ (history) => <CardMore /> }/>
 
-                    </Switch>*/}
+                    </Switch>
 
-                <Login/>
+                </ContentCustom>
                 <Footer style={ { textAlign: 'center' } }>Ant Design ©2023 Created by Ant UED</Footer>
             </Layout>
 
@@ -76,5 +71,4 @@ const App: React.FC = observer(() => {
         </Layout>
     )
 })
-
 export default App
